@@ -9,7 +9,6 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-      'fontawesome/css/all.min.css',
       'spa_assets/css/app.css',
     ];
     public $js = [
