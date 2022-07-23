@@ -1,0 +1,132 @@
+version: '2'
+networks:
+    my-network:
+        driver: bridge
+services:
+    nginx:
+        image: nginx:1.19.10
+        container_name: nginx
+        # маршрутизируем порты
+        ports:
+            - "80:80"
+            - "443:443"
+            - "8080:8080"
+        # монтируем директории, слева директории на основной машине, справа - куда они монтируются в контейнере
+        volumes:
+            - ./yii2.docker.conf:/etc/nginx/conf.d/default.conf
+            - ./:/var/www/yii2.docker
+            - ./docker/nginx:/var/log/nginx
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        logging:
+            options:
+                max-file: "1"
+                max-size: "10k"
+        # nginx должен общаться с php контейнером
+        links:
+            - php
+
+        networks:
+            - my-network
+        environment:
+            - TZ=Europe/Moscow
+            - VIRTUAL_HOST=yii2.docker
+
+
+    php:
+        # image: php-7.4_cron
+        build: ./docker/php
+        container_name: php
+        # монтируем директорию с проектами
+        volumes:
+            - ./:/var/www/yii2.docker
+            - ./docker/php/crontab:/etc/cron.d
+            - ./docker/php/log:/var/log/cron
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/timezone:/etc/timezone:ro
+        networks:
+            - my-network
+        # command: "php-fpm cron"
+
+#    redis:
+#        image: redis:latest
+#        restart: always
+#        ports:
+#            - "6379:6379"
+#        networks:
+#            - my-network
+#        command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+#
+#    mysql:
+#         image: mysql:8
+#         restart: always
+#         ports:
+#             - "3306:3306"
+#         volumes:
+#             - ./mysql:/var/lib/mysql
+#         environment:
+#             # MYSQL_HOST: mysql
+#             # MYSQL_USER: root
+#             MYSQL_PASSWORD: root
+#             MYSQL_ROOT_PASSWORD: root
+#             MYSQL_DATABASE: demo
+#
+#         command: --default-authentication-plugin=mysql_native_password
+#         networks:
+#             - my-network
+
+
+     #PhpMyAdmin
+    pma:
+         image: phpmyadmin/phpmyadmin
+         container_name: pma
+         #image: phpmyadmin/phpmyadmin:5.1.0
+         ports:
+             - "8083:80"
+         environment:
+             PMA_HOST: 172.17.0.1
+             MYSQL_USER: root
+             MYSQL_PASSWORD: root
+             MYSQL_ROOT_PASSWORD: root
+
+#        volumes:
+#            - type: bind
+#              source: ${PWD}/config.sample.inc.php
+#              target: /config.sample.inc.php
+#              read_only: true
+
+        # networks:
+        #     - my-network
+
+    #PhpRedisAdmin
+    pra:
+         image: erikdubbelboer/phpredisadmin
+         container_name: pra
+         ports:
+             - "8084:80"
+         environment:
+             REDIS_1_HOST: 172.17.0.1
+             REDIS_1_PORT: 6379
+             ADMIN_USER: root
+             ADMIN_PASS: root
+         networks:
+             - my-network
+
+
+    #cron
+    # cron:
+    #      image: renskiy/cron:alpine
+    #      container_name: cron
+    #      volumes:
+    #          - ./:/var/www/yii2.docker
+    #          - ./docker/cron/crontab:/etc/cron.d
+    #          - ./docker/cron/log:/var/log/cron
+    #      networks:
+    #          - my-network
+    #      ports:
+    #          - "9000:9000"
+    #      links:
+    #          - php
+    #      depends_on:
+    #          - php
+    #      command: crond -f -d 8

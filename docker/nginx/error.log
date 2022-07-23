@@ -1,0 +1,6 @@
+2022/05/16 10:52:38 [error] 30#30: *6 connect() failed (111: Connection refused) while connecting to upstream, client: 172.19.0.1, server: yii2.docker, request: "GET /phpmyadmin HTTP/1.1", upstream: "http://127.0.0.1:8083/phpmyadmin", host: "localhost"
+2022/05/16 10:52:38 [warn] 30#30: *6 upstream server temporarily disabled while connecting to upstream, client: 172.19.0.1, server: yii2.docker, request: "GET /phpmyadmin HTTP/1.1", upstream: "http://127.0.0.1:8083/phpmyadmin", host: "localhost"
+2022/05/16 10:52:38 [error] 30#30: *6 connect() failed (111: Connection refused) while connecting to upstream, client: 172.19.0.1, server: yii2.docker, request: "GET /phpmyadmin HTTP/1.1", upstream: "http://127.0.0.1:8083/phpmyadmin", host: "localhost"
+2022/05/16 10:52:38 [warn] 30#30: *6 upstream server temporarily disabled while connecting to upstream, client: 172.19.0.1, server: yii2.docker, request: "GET /phpmyadmin HTTP/1.1", upstream: "http://127.0.0.1:8083/phpmyadmin", host: "localhost"
+2022/05/16 11:48:33 [emerg] 1#1: no "ssl_certificate" is defined for the "listen ... ssl" directive in /etc/nginx/conf.d/default.conf:1
+2022/05/16 11:51:54 [emerg] 1#1: no "ssl_certificate" is defined for the "listen ... ssl" directive in /etc/nginx/conf.d/default.conf:1

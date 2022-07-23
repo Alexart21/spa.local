@@ -1,0 +1,90 @@
+Запуск MYSQL
+  docker run -p 3306:3306 --name mysql8 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_PASSWORD=root -e MYSQL_DATABASE=alexart1_mih mysql:8
+
+Или (c пробросом файлов)
+	docker run -p 3306:3306 -v /docker/mysql:/var/lib/mysql --name mysql8 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_PASSWORD=root -e MYSQL_DATABASE=alexart1_mih mysql:8
+
+
+  --default-authentication-plugin=mysql_native_password
+
+Импорт дампа:
+  docker exec -i mysql8 mysql -uroot -proot alexart1_mih < .dump.sql
+
+Запуск Redis
+   docker run -p 6379:6379 --name redis redis
+
+
+Далее : docker-compose up -d
+
+Что бы работал YII DEBAG изменить IP в файле config/web.php как там указано.
+
+Удаление нерабочих контейнеров:
+  docker rm $(docker ps -a -q -f status=exited)
+
+Вот команда, которая позволяет быстро остановить все работающие контейнеры:
+docker container kill $(docker ps -q)
+
+
+  Насчет автоматизации дампа посмотри https://qastack.ru/programming/25920029/setting-up-mysql-and-importing-dump-within-dockerfile
+
+
+  Консольные команды пример:
+ docker exec -t <php-container-id> php yii2.docker/yii server/start
+ // запуск ws чат сервера
+ docker exec -t php php yii2.docker/yii server/start
+
+ ///////////////
+
+  docker exec -i <cont_id> bash
+ 
+
+
+Реверс миграция :
+ docker exec -i d68 php yii2.docker/yii migration/table auth,callback,chat,content,post,user,wschat
+
+
+///////////////////////////////////////////////////////
+
+Запуск crontab:(В контейнере на образе hchstera/alpine-php-cron уже есть php 7.1.16)
+
+docker-compose -f docker-compose-cron.yml up -d
+
+
+После запуска контейнера:
+
+В КОНТЕЙНЕРЕ PHP ТЕПЕРЬ КРОН !!!
+  
+docker exec -i php bash
+crontab /var/www/yii2.docker/docker/cron/crontab/crontab
+
+crontab /var/www/yii2.docker/docker/cron/crontab/crontab_last
+
+
+Пример crontab файла:
+# каждые 2 минут
+*/2 * * * * php /var/www/yii2.docker/yii hello > /proc/1/fd/1 2>/proc/1/fd/2
+(Не забудь пустой перевод строки в конце LF(Unix))
+
+*******************************************************************
+*******************************************************************
+
+ЗАПУСК ЧАТА НА WEBSOCKET ПРОЕКТА ALEXART.DOCKER
+1. Удостовериться что URL в JS скрипте соответствует реальному(файл views/wschat/index.php). Локально это ws://localhost:8080/wschat.
+
+
+2. Узнать IP контейнера PHP команда
+  docker inspect <php_container_id> значение IPAddress
+
+3. Вставить значение IPAddress в конфигурацию NGINX сервера(строка 41 файла yii2.docker.conf)
+здесь => upstream websocket {
+   server 172.19.0.3:8080;
+}
+
+4. Перезапустить NGINX контейнер (команда docker restart <nginx_container_id>)
+
+5. Запустить вебсокет сервер командой 
+docker exec -t php php yii2.docker/yii server/start
+
+6. РАДУЕМСО !!!
+Остановка вебсокет сервера перезапуском контейнера php
+

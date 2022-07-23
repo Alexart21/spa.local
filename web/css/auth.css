@@ -1,0 +1,538 @@
+:root {
+    --logo-color: #e61b05;
+    --btn-color: #FD9638;
+    --viber-color: #774E98;
+    --watsapp-color: #12940A;
+    --tg-color: #52ADDE;
+}
+
+@font-face {
+    font-family: latoBold;
+    src: url(/fonts/LatoBold.woff);
+    font-display: swap;
+}
+
+@media all and (max-width: 846px), all and (max-device-width: 846px) {
+    /* виджет мессенджеров */
+    #msg-block {
+        width: 80% !important;
+        max-width: 500px;
+    }
+
+    #msg-content > div.msg-text {
+        font-size: 180% !important;
+    }
+
+    .msg-closed-text {
+        display: block;
+        /*left: 180px;*/
+        font-size: 140% !important;
+        margin-top: -60px !important;
+    }
+
+    .tooltip-inner {
+        font-size: 180% !important;
+    }
+
+    .msg-btn {
+        letter-spacing: 2px;
+    }
+
+    .viber-bg {
+        /*margin-top: -30px !important;*/
+    }
+}
+
+body {
+    position: relative;
+    font-family: Arial;
+    background: url("/img/main_img/logo.png");
+    background-repeat: no-repeat;
+    /*opacity: 0.5;*/
+    /*top: 0;*/
+    /*left: 0;*/
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.help-block {
+    color: red !important;
+    max-width: 300px;
+}
+
+.logo-over {
+    display: block;
+    position: absolute;
+    z-index: 1000000;
+    left: 0;
+    top: 0;
+    width: 240px;
+    height: 138px;
+    background: transparent
+}
+
+#container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cont-wrapper {
+    flex: 1 0 auto;
+}
+
+.bottom-menu {
+    position: relative;
+    z-index: 1051;
+    height: 30px;
+    margin-top: .5em;
+}
+
+.bottom-menu div{
+    height: 30px;
+    line-height: 30px;
+}
+
+.bottom-menu i{
+    font-size: 30px;
+}
+
+.username {
+    display: inline-block;
+    padding-top: -100px;
+    line-height: 30px;
+    max-width: 24em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*.avatar-icon{
+    width: 60px;
+    height: auto;
+    border: 0 solid transparent;
+    border-radius: 50%;
+}*/
+
+.site-login {
+    background: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 2em 2em 0 2em;
+    box-shadow: -2rem 2rem 2rem rgba(0, 0, 0, 0.2), inset 0 0 30px #ddd;
+    border: 1px solid #e61b05;
+    border-radius: 3px;
+    /*margin-top: 2rem;*/
+}
+
+input[type=text], input[type=password], input[type=password] {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #0f253c;
+    margin: 0 auto;
+    width: 95%;
+    height: 30px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #C25025;
+    border-bottom-left-radius: 20px;
+    padding-left: 1em;
+    box-shadow: 0 1px #0f253c;
+    display: inline-block !important;
+}
+
+
+/*button{
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: rgba(86, 116, 116, 0.5);
+    cursor: pointer;
+    border: 1px solid #e61b05;
+    border-radius: 5px;
+}*/
+
+button:hover {
+    text-shadow: .5px .5px #e61b05;
+    box-shadow: -5px 5px 5px #95999c;
+    top: -3px;
+}
+
+.fa-eye-slash, .fa-eye, .fa-user {
+    display: inline-block !important;
+    margin-left: -35px !important;
+    color: #e61b05;
+    cursor: pointer;
+}
+
+::placeholder {
+    font-weight: bold;
+}
+
+.modal-content {
+    /*background: lime !important;*/
+    border: none !important;
+    width: 420px !important;
+    margin: 0 auto;
+}
+
+.modal-header {
+    display: none;
+}
+
+/* Checkbocks */
+/* .squaredTwo */
+.squaredTwo {
+    width: 28px;
+    height: 28px;
+    position: relative;
+    background: #fcfff4;
+    background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.squaredTwo label {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    /*background: linear-gradient(to bottom, #eee 0%, #999 100%);*/
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+}
+
+.squaredTwo label:after {
+    content: '';
+    width: 20px;
+    height: 10px;
+    position: absolute;
+    /*top: 4px;*/
+    /*left: 4px;*/
+    border: 3px solid #218838;
+    border-top: none;
+    border-right: none;
+    background: transparent;
+    opacity: 0;
+    transform: rotate(-45deg);
+}
+
+/*.squaredTwo label:hover::after {
+    opacity: 0.3;
+}*/
+.squaredTwo input[type=checkbox] {
+    visibility: hidden;
+}
+
+.squaredTwo input[type=checkbox]:checked + label:after {
+    opacity: 1;
+}
+
+.squaredTwo span {
+    display: block;
+    width: 260px;
+    position: absolute;
+    left: 40px;
+    top: 2px;
+}
+
+/* end .squaredOne */
+/* Однокласники */
+.mailru {
+    background-image: url('/img/mailruicon.png');
+    background-size: cover;
+    /*transform: scale(0.5);*/
+}
+
+.usr-set {
+    width: 400px;
+    /*margin: 0 auto*/
+}
+
+fieldset {
+    padding: 1em;
+    border: 1px solid #000;
+}
+
+/* Drag &Drop */
+.drop-zone {
+    /*max-width: 200px;*/
+    height: 200px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /*font-family: "Quicksand", sans-serif;*/
+    font-weight: 500;
+    font-size: 20px;
+    cursor: pointer;
+    color: #222;
+    border: 4px dashed #009578;
+    border-radius: 10px;
+}
+
+.drop-zone--over {
+    border-style: solid;
+}
+
+.drop-zone__input {
+    display: none;
+}
+
+.drop-zone__thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #cccccc;
+    background-size: cover;
+    position: relative;
+}
+
+.drop-zone__thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 14px;
+    text-align: center;
+}
+
+.fa-cloud-upload-alt {
+    color: blue;
+    font-size: 200%;
+}
+
+.success-button {
+    position: relative;
+    /*margin-top: 1vw;*/
+    background: var(--btn-color);
+    color: white;
+    font-family: latoBold;
+    border: none;
+    /* text-transform: uppercase; */
+    padding: 13px 30px;
+    font-size: 1.5vw;
+    letter-spacing: 0.1em;
+    font-weight: 300;
+    transition: all 333ms ease-in-out;
+    overflow: hidden;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
+}
+
+.success-button:hover {
+    cursor: pointer !important;
+    background: #313A3D;
+    color: var(--btn-color);
+    top: -5px;
+}
+
+.success-button:focus {
+    outline: none;
+    background: #cd6302;
+}
+
+/**/
+/* блок с иконками мессенджеров*/
+#msg-block {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    height: 50px;
+    border: 1px solid #222;
+    /*background: rgba(150, 150, 150, .4);*/
+    background: #f4fcff;
+    /*background: url('/img/wats-bg.gif');*/
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 0 40px #87ffdb, 0 0 5px var(--btn-color) inset;
+}
+
+.msg-opened {
+    height: 350px !important;
+}
+
+.msg-text {
+    width: 80%;
+    margin: 50px auto 0 auto;
+    background: #AAD9C2;
+    border: 0px solid transparent;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #555;
+}
+
+#msg-content {
+    margin-top: -20px;
+}
+
+.msg-closed {
+    overflow: hidden;
+    position: relative;
+    display: block;
+    font-size: 26px;
+    color: #222;
+    margin-top: 24px;
+    cursor: pointer;
+    background: inherit;
+    /*height: 40px;*/
+    /*line-height: 40px;*/
+}
+
+.msg-closed-text {
+    position: absolute;
+    left: 130px
+}
+
+.msg-closed i {
+    font-size: 34px;
+    /*color: lime !important;*/
+}
+
+.msg-img {
+    position: absolute;
+    top: -35px;
+    right: 0;
+}
+
+.msg-btn {
+    display: block;
+    padding: 5px;
+    text-align: center;
+    /*background: #0d6aad;*/
+    border: 0px solid transparent;
+    border-radius: 10px;
+    text-decoration: none !important;
+    font-size: 30px;
+    color: #fff;
+    width: 80%;
+    min-width: 160px;
+    margin: 0 auto 10px auto;
+}
+
+.viber-bg {
+    background: var(--viber-color);
+}
+
+.watsap-bg {
+    background: var(--watsapp-color);
+}
+
+.tg-bg {
+    background: var(--tg-color);
+}
+
+.viber {
+    color: var(--viber-color);
+}
+
+.wats {
+    color: var(--watsapp-color);
+}
+
+.tg {
+    color: var(--tg-color);
+}
+
+.msg-btn:hover, .msg-btn:visited {
+    box-shadow: 4px 4px 10px #999;
+    color: #fff !important;
+}
+
+.msg-btn i {
+    font-size: 26px;
+}
+
+#msg-block > button {
+    /*display: none;*/
+    position: absolute;
+    top: 10px;
+    right: 24px;
+}
+
+#msg-block hr {
+    border-bottom: 1px dashed #222;
+}
+
+/* всплывающая подсказка над чатом */
+.tooltip {
+    z-index: 100001 !important;
+}
+
+.tooltip-inner {
+    font-size: 18px;
+    color: #222;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background-color: #fff !important;
+    border: 1px solid #222;
+    box-shadow: 0 0 8px inset var(--logo-color);
+}
+
+.arrow::before {
+    border-top-color: #222 !important;
+}
+
+/**/
+.auth-hr {
+    width: 90%;
+    margin: .5em auto;
+    border-bottom: 1px dashed #999;
+}
+
+a.btn-set, a.btn-set:active, a.btn-set:visited {
+    display: inline-block;
+    font-weight: bold;
+    /*border-left: 2px solid #222;*/
+    /*border: 1px solid #222;*/
+    padding: .3em;
+    /*text-decoration: none;*/
+    color: #222;
+    text-decoration: underline;
+}
+
+.breadcrumb-out {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 2rem;
+    position: relative;
+    z-index: 1100;
+}
+
+.breadcrumb {
+    background: none;
+    padding: 0;
+    letter-spacing: 1px;
+}
+
+.breadcrumb a, .breadcrumb a:active, .breadcrumb a:visited {
+    color: #222;
+    font-weight: bold;
+    font-size: 110%;
+    text-shadow: 0 .5px var(--btn-color);
+    /*text-decoration: underline !important;*/
+}
+
+.label {
+    display: block;
+}
+
+.avatar-del {
+    display: block;
+    /*height: 2em;*/
+    /*background: lime;*/
+}

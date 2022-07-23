@@ -1,0 +1,2 @@
+# каждые 2 минут
+*/2 * * * * php var/www/yii2.docker/yii last > /proc/1/fd/1 2>/proc/1/fd/2

@@ -1,0 +1,13 @@
+version: '2'
+services:
+  cron:
+        image: hchstera/alpine-php-cron
+        # image: alpine:3.13.5
+        #build: ./docker/cron
+        container_name: cron
+        volumes:
+            - ./:/var/www/yii2.docker
+            - ./docker/cron/crontab:/etc/cron.d
+            - ./docker/cron/log:/var/log/cron
+
+        command: crond -f -d 8
