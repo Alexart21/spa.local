@@ -10,6 +10,7 @@ use app\models\Callback;
 use app\models\Post;
 use app\models\User;
 use Yii;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 
 class SiteController extends Controller
@@ -149,14 +150,27 @@ class SiteController extends Controller
 
     /* Отправка сообщения и запись в БД */
     if ($indexForm->load($request->post())) {
+      $response = Yii::$app->response;
+      $response->format = \yii\web\Response::FORMAT_JSON;
       if ($indexForm->validate()) {
-        $success = $indexForm->mailSend(); // отправка email
 
+        $success = $indexForm->mailSend(); // отправка email
         $msg = new Post();
         $res = $msg->dbSave($indexForm); // звпись в БД
-        return $success && $res;
-      } else { // reCapctha3 не пропустила или иная причина
-        return false;
+
+        if($success && $res){
+          $response->data = ['status' => true];
+          return json_encode($response->data);
+        }else{
+          $response->data = ['status' => false];
+          return json_encode($response->data);
+        }
+      } else { // reCapctha3 не пропустила или иная причина валидации
+       // throw new BadRequestHttpException(serialize($indexForm->errors));
+        $errors = $indexForm->errors;
+        // $msg = json_encode($errors);
+        $response->data = ['status' => false, 'msg' => $errors];
+        return json_encode($response->data);
       }
     }
     return $this->render('index');
@@ -171,14 +185,25 @@ class SiteController extends Controller
         if ($request->isPost) {
             $formModel = new CallForm();
 
-            if ($formModel->load($request->post())) { 
+            if ($formModel->load($request->post())) {
+              $response = Yii::$app->response;
+              $response->format = \yii\web\Response::FORMAT_JSON; 
               if($formModel->validate()){
                 // Отправка email и запись в БД
                 $success = $formModel->callSend();
                 $call = new Callback();
                 $res = $call->dbSend($formModel);
-                return $success && $res;
+                if($success && $res){
+                  $response->data = ['status' => true];
+                  return json_encode($response->data);
+                }else{
+                  $response->data = ['status' => false];
+                  return json_encode($response->data);
+                }
               } else { // reCapctha3 не пропустила или иная причина
+                $errors = $formModel->errors;
+                $response->data = ['status' => false, 'msg' => $errors];
+                return json_encode($response->data);
                 return false;
             }
           } 

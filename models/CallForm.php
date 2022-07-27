@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alex
- * Date: 19.08.2018
- * Time: 13:41
- */
-
 namespace app\models;
 
 use Yii;
@@ -16,7 +9,7 @@ class callForm extends Model
 {
     public $name;
     public $tel;
-//    public $reCaptcha;
+   public $reCaptcha;
 
     public function rules()
     {
@@ -30,11 +23,11 @@ class callForm extends Model
                 'uncheckedMessage' => 'Подтвердите, что вы не робот'],*/
 
             //reCaptcha v3
-           /* [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator3::className(),
+            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator3::className(),
                 'secret' => Yii::$app->params['secretV3'], // unnecessary if reСaptcha is already configured
                 'threshold' => 0.5,
                 'action' => 'call',
-            ],*/
+            ],
         ];
     }
 
@@ -47,7 +40,7 @@ class callForm extends Model
         return [
             'name' => 'Ваше Имя',
             'tel' => 'Номер телефона',
-//            'reCaptcha' => '',
+            'reCaptcha' => '',
         ];
     }
 

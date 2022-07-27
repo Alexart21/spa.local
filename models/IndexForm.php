@@ -13,7 +13,7 @@ class IndexForm extends Model
   public $email;
   public $tel;
   public $text;
-//  public $reCaptcha;
+  public $reCaptcha;
 
   public function rules()
   {
@@ -27,19 +27,18 @@ class IndexForm extends Model
           'secret' => Yii::$app->params['secretV2'], // unnecessary if reСaptcha is already configured
           'uncheckedMessage' => 'Подтвердите, что вы не робот'],*/
       // на главной V3 использую!
-      /*[['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator3::class,
+      [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator3::class,
         'secret' => Yii::$app->params['secretV3'], // unnecessary if reСaptcha is already configured
         'threshold' => 0.5,
         'action' => 'index',
-      ],*/
-
+      ],
     ];
   }
 
   public function attributeLabels()
   {
     return [
-//      'reCaptcha' => '',
+     'reCaptcha' => '',
       'name' => 'Имя',
       'tel' => 'Тел.',
       'text' => 'Текст',

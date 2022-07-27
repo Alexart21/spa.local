@@ -39,8 +39,7 @@ setcookie('csrf_token', $csrf_token);
     <meta name="referrer" content="origin"/>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="HandheldFriendly" content="true">
-    <!-- <script src="/js/jquery.min.js"></script> -->
-    <!-- <script src="//www.google.com/recaptcha/api.js?render=6LftRl0aAAAAAHJDSCKdThCy1TaS9OwaGNPSgWyC"></script> -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LftRl0aAAAAAHJDSCKdThCy1TaS9OwaGNPSgWyC"></script>
   <?php $this->head() ?>
 </head>
 <body>
