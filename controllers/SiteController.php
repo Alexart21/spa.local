@@ -204,7 +204,6 @@ class SiteController extends Controller
                 $errors = $formModel->errors;
                 $response->data = ['status' => false, 'msg' => $errors];
                 return json_encode($response->data);
-                return false;
             }
           } 
         }

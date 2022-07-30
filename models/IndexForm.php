@@ -20,9 +20,9 @@ class IndexForm extends Model
     return [
       [['name', 'email', 'text'], 'required', 'message' => 'заполните это поле !'],
       ['email', 'email'],
-      ['name', 'string', 'length' => [3, 30]],
+      ['name', 'string', 'length' => [3, 30], 'message' => 'имя должно быть от 3 до 30 символов!'],
       ['tel', 'string', 'length' => [11, 30]],
-      ['text', 'string', 'length' => [3, 2000]],
+      ['text', 'string', 'length' => [2, 2000],  'message' => 'текст должен быть быть от 2 до 2000 символов!'],
       /*[['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator2::class,
           'secret' => Yii::$app->params['secretV2'], // unnecessary if reСaptcha is already configured
           'uncheckedMessage' => 'Подтвердите, что вы не робот'],*/
@@ -31,6 +31,7 @@ class IndexForm extends Model
         'secret' => Yii::$app->params['secretV3'], // unnecessary if reСaptcha is already configured
         'threshold' => 0.5,
         'action' => 'index',
+        'message' => 'Не пройдена reCaptcha!, повторите попытку.'
       ],
     ];
   }

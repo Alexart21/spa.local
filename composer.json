@@ -41,7 +41,8 @@
     "isudakoff/yii2-mailru-authclient": "*",
     "consik/yii2-websocket": "^1.0",
     "aki/yii2-vue": "*",
-    "bilginnet/yii2-cropper": "dev-master"
+    "bilginnet/yii2-cropper": "dev-master",
+    "kotchuprik/yii2-odnoklassniki-authclient": "*"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0.0",

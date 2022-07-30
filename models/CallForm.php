@@ -9,15 +9,15 @@ class callForm extends Model
 {
     public $name;
     public $tel;
-   public $reCaptcha;
+    public $reCaptcha;
 
     public function rules()
     {
         return [
             // name, email, subject and body are required
             [['name', 'tel'], 'required', 'message' => 'заполните это поле !'],
-            ['name', 'string', 'length' => [3, 30]],
-            ['tel', 'string', 'length' => [11, 30]],
+            ['name', 'string', 'length' => [3, 30], 'message' => 'имя должно быть от 3 до 30 символов!'],
+            ['tel', 'string', 'length' => [11, 30], 'message' => 'номер не более 30 символов!'],
             /*[['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator2::class,
                 'secret' => Yii::$app->params['secretV2'], // unnecessary if reСaptcha is already configured
                 'uncheckedMessage' => 'Подтвердите, что вы не робот'],*/
@@ -27,6 +27,7 @@ class callForm extends Model
                 'secret' => Yii::$app->params['secretV3'], // unnecessary if reСaptcha is already configured
                 'threshold' => 0.5,
                 'action' => 'call',
+                'message' => 'Не пройдена reCaptcha!, повторите попытку.'
             ],
         ];
     }
