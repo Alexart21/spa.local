@@ -9,6 +9,7 @@ use app\models\CallForm;
 use app\models\Callback;
 use app\models\Post;
 use app\models\User;
+use app\models\City;
 use Yii;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -207,6 +208,20 @@ class SiteController extends Controller
             }
           } 
         }
+    }
+
+    public function actionRegion($code)
+    {
+      $response = Yii::$app->response;
+      $response->format = \yii\web\Response::FORMAT_JSON;
+      $citys = City::findAll(['region_id' => $code]);
+      if($citys){
+        $response->data = ['success' => true, 'data' => $citys];
+      }else{
+        $response->data = ['success' => false];
+      }
+      return $response->data;
+//      return json_encode($citys);
     }
 
     public function actionPolitic()

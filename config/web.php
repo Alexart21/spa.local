@@ -213,7 +213,7 @@ $config = [
             'enableStrictParsing' => false,
             'rules' => [
                 // слева Url справа controller/action
-                '<action:(index|sozdanie|prodvijenie|parsing|portfolio|politic|call|call_ok)>' => 'site/<action>',
+                '<action:(index|sozdanie|prodvijenie|parsing|portfolio|politic|call|call_ok|region)>' => 'site/<action>',
                 '<action:(login|logout|signup|request-password-reset|reset-password)>' => 'user/<action>',
 //                '<action:\w+>' => 'site/<action>',
             ],
