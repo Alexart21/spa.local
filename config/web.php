@@ -164,7 +164,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'dfghdhdh2353w46tvw354645',
-            'csrfParam' => '_csrf-frontend',
+            // 'csrfParam' => '_csrf-frontend',
             'csrfCookie' => [
                 'httpOnly' => true,
             ],
@@ -221,7 +221,7 @@ $config = [
 //              '<module:\w+>/<controller:\w+>/<action::\w+>' => '<module>/<controller>/<action>',
 //              '<module:(alexadmx)>' => '<module>/<controller>/<action>',
               '<action:(index|sozdanie|prodvijenie|parsing|portfolio|location|politic)>' => 'site/index',
-              '<action:(call|country|region|city)>' => 'site/<action>',
+              '<action:(user|call|country|region|city)>' => 'site/<action>',
               '<action:(login|logout|signup|request-password-reset|reset-password)>' => 'user/<action>',
 //            '<action:\w+>' => 'site/<action>',
 //              '<url:(.*)>' => 'site/index',

@@ -175,6 +175,21 @@ class SiteController extends Controller
     return $this->render('index');
   }
 
+  public function actionUser(){
+//    die('here');
+    $response = Yii::$app->response;
+    $response->format = \yii\web\Response::FORMAT_JSON;
+    if (Yii::$app->user->isGuest){
+      $response->data = ['isGuest' => true];
+    }else{
+      $response->data = [
+        'isGuest' => false,
+        'username' => Yii::$app->user->identity->username,
+        'avatarPath' => Yii::$app->user->identity->avatar_path ? '/upload/users/usr' . Yii::$app->user->identity->getId() . '/img/avatar/' . Yii::$app->user->identity->avatar_path : '/upload/default_avatar/no-image.png',
+      ];
+    }
+    return $response->data;
+  }
 
   /* Виджет обратного звонка */
   public function actionCall()
