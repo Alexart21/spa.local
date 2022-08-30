@@ -9,7 +9,9 @@ use app\models\CallForm;
 use app\models\Callback;
 use app\models\Post;
 use app\models\User;
+use app\models\Country;
 use app\models\City;
+use app\models\Region;
 use Yii;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -159,74 +161,107 @@ class SiteController extends Controller
         $msg = new Post();
         $res = $msg->dbSave($indexForm); // звпись в БД
 
-        if($success && $res){
+        if ($success && $res) {
           $response->data = ['status' => true];
-          return json_encode($response->data);
-        }else{
+        } else {
           $response->data = ['status' => false];
-          return json_encode($response->data);
         }
       } else { // reCapctha3 не пропустила или иная причина валидации
-       // throw new BadRequestHttpException(serialize($indexForm->errors));
         $errors = $indexForm->errors;
-        // $msg = json_encode($errors);
         $response->data = ['status' => false, 'msg' => $errors];
-        return json_encode($response->data);
       }
+      return json_encode($response->data);
     }
     return $this->render('index');
   }
 
 
   /* Виджет обратного звонка */
-    public function actionCall()
-    {
-        // die('here');
-        $request = Yii::$app->request;
-        if ($request->isPost) {
-            $formModel = new CallForm();
+  public function actionCall()
+  {
+    // die('here');
+    $request = Yii::$app->request;
+    if ($request->isPost) {
+      $formModel = new CallForm();
 
-            if ($formModel->load($request->post())) {
-              $response = Yii::$app->response;
-              $response->format = \yii\web\Response::FORMAT_JSON; 
-              if($formModel->validate()){
-                // Отправка email и запись в БД
-                $success = $formModel->callSend();
-                $call = new Callback();
-                $res = $call->dbSend($formModel);
-                if($success && $res){
-                  $response->data = ['status' => true];
-                  return json_encode($response->data);
-                }else{
-                  $response->data = ['status' => false];
-                  return json_encode($response->data);
-                }
-              } else { // reCapctha3 не пропустила или иная причина
-                $errors = $formModel->errors;
-                $response->data = ['status' => false, 'msg' => $errors];
-                return json_encode($response->data);
-            }
-          } 
+      if ($formModel->load($request->post())) {
+        $response = Yii::$app->response;
+        $response->format = \yii\web\Response::FORMAT_JSON;
+        if ($formModel->validate()) {
+          // Отправка email и запись в БД
+          $success = $formModel->callSend();
+          $call = new Callback();
+          $res = $call->dbSend($formModel);
+          if ($success && $res) {
+            $response->data = ['status' => true];
+          } else {
+            $response->data = ['status' => false];
+          }
+        } else { // reCapctha3 не пропустила или иная причина
+          $errors = $formModel->errors;
+          $response->data = ['status' => false, 'msg' => $errors];
         }
-    }
-
-    public function actionRegion($code)
-    {
-      $response = Yii::$app->response;
-      $response->format = \yii\web\Response::FORMAT_JSON;
-      $citys = City::findAll(['region_id' => $code]);
-      if($citys){
-        $response->data = ['success' => true, 'data' => $citys];
-      }else{
-        $response->data = ['success' => false];
+        return json_encode($response->data);
       }
-      return $response->data;
-//      return json_encode($citys);
     }
+  }
 
-    public function actionPolitic()
-    {
-      return $this->renderFile(__DIR__ . '/../views/site/politic.php');
+  public function actionCountry()
+  {
+    $response = Yii::$app->response;
+    $response->format = \yii\web\Response::FORMAT_JSON;
+//      $regions = Region::findAll(['country_id' => $code]);
+    $country = Country::find()
+      ->orderBy('name')
+      ->all();
+    if ($country) {
+      $response->data = ['success' => true, 'data' => $country];
+    } else {
+      $response->data = ['success' => false];
     }
+    return $response->data;
+//      return json_encode($citys);
+  }
+  
+  public function actionRegion($code = 3159)
+  {
+    $response = Yii::$app->response;
+    $response->format = \yii\web\Response::FORMAT_JSON;
+//      $regions = Region::findAll(['country_id' => $code]);
+    $regions = Region::find()
+      ->where(['country_id' => $code])
+      ->orderBy('name')
+      ->all();
+    if ($regions) {
+      $response->data = ['success' => true, 'data' => $regions];
+    } else {
+      $response->data = ['success' => false];
+    }
+    return $response->data;
+//      return json_encode($citys);
+  }
+
+  public function actionCity($code = 4312)
+  {
+    $response = Yii::$app->response;
+    $response->format = \yii\web\Response::FORMAT_JSON;
+//      $citys = City::findAll(['region_id' => $code]);
+    $citys = City::find()
+      ->where(['region_id' => $code])
+      ->orderBy('name')
+      ->all();
+    if ($citys) {
+      $response->data = ['success' => true, 'data' => $citys];
+    } else {
+      $response->data = ['success' => false];
+    }
+    return $response->data;
+//      return json_encode($citys);
+  }
+
+  public function actionPolitic()
+  {
+    return $this->renderFile(__DIR__ . '/../views/site/politic.php');
+  }
 
 }

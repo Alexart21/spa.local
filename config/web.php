@@ -164,10 +164,14 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'dfghdhdh2353w46tvw354645',
+            'csrfParam' => '_csrf-frontend',
             'csrfCookie' => [
                 'httpOnly' => true,
             ],
             'baseUrl' => '', // для чпу надо
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
         'user' => [
             'identityClass' => 'app\models\User',
@@ -213,9 +217,14 @@ $config = [
             'enableStrictParsing' => false,
             'rules' => [
                 // слева Url справа controller/action
-                '<action:(index|sozdanie|prodvijenie|parsing|portfolio|politic|call|call_ok|region)>' => 'site/<action>',
-                '<action:(login|logout|signup|request-password-reset|reset-password)>' => 'user/<action>',
-//                '<action:\w+>' => 'site/<action>',
+              ['class' => 'yii\rest\UrlRule', 'controller' => 'site'],
+//              '<module:\w+>/<controller:\w+>/<action::\w+>' => '<module>/<controller>/<action>',
+//              '<module:(alexadmx)>' => '<module>/<controller>/<action>',
+              '<action:(index|sozdanie|prodvijenie|parsing|portfolio|location|politic)>' => 'site/index',
+              '<action:(country|region|city)>' => 'site/<action>',
+              '<action:(login|logout|signup|request-password-reset|reset-password)>' => 'user/<action>',
+//            '<action:\w+>' => 'site/<action>',
+//              '<url:(.*)>' => 'site/index',
             ],
         ],
 
