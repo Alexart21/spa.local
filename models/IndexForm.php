@@ -39,7 +39,7 @@ class IndexForm extends Model
   public function attributeLabels()
   {
     return [
-     'reCaptcha' => '',
+      'reCaptcha' => '',
       'name' => 'Имя',
       'tel' => 'Тел.',
       'text' => 'Текст',

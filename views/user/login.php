@@ -52,12 +52,12 @@ Modal::begin([
     <br/>
     <?= $form->field($model, 'password', ['template' => "<div class='form-group'> {input} <span class=\"clicked fa fa-eye-slash\"></span><div>{error}</div></div>",])->passwordInput(['class' => 'pass-input', 'placeholder' => 'Пароль']) ?>
 
-    <?php echo $form->field($model, 'reCaptcha')->widget(
+    <?php /*echo $form->field($model, 'reCaptcha')->widget(
         \himiklab\yii2\recaptcha\ReCaptcha2::class,
         [
             'siteKey' =>  Yii::$app->params['siteKeyV2'], // unnecessary is reCaptcha component was set up
         ]
-    ) ?>
+    ) */?>
 
     <?= $form->field($model, 'rememberMe')->checkbox([
         'template' => "<div class=\"squaredTwo\">{input} {label}<span id =\"labelText\">Запомнить на " . Yii::$app->params['rememberMeDay'] . " дней</span></div>\n<div class=\"col-lg-8\">{error}</div>",
