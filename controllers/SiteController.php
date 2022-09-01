@@ -185,6 +185,9 @@ class SiteController extends Controller
       $response->data = [
         'isGuest' => false,
         'username' => Yii::$app->user->identity->username,
+        'email' => Yii::$app->user->identity->email,
+        'role' => Yii::$app->user->identity->role,
+        'status' => Yii::$app->user->identity->status,
         'avatarPath' => Yii::$app->user->identity->avatar_path ? '/upload/users/usr' . Yii::$app->user->identity->getId() . '/img/avatar/' . Yii::$app->user->identity->avatar_path : '/upload/default_avatar/no-image.png',
       ];
     }
