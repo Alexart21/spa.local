@@ -216,15 +216,15 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
-                // слева Url справа controller/action
               ['class' => 'yii\rest\UrlRule', 'controller' => 'site'],
-//              '<module:\w+>/<controller:\w+>/<action::\w+>' => '<module>/<controller>/<action>',
-//              '<module:(alexadmx)>' => '<module>/<controller>/<action>',
-              '<action:(index|sozdanie|prodvijenie|parsing|portfolio|location|politic)>' => 'site/index',
-              '<action:(user|call|country|region|city)>' => 'site/<action>',
+               // spa ссылки
+              '<action:(index|sozdanie|prodvijenie|parsing|portfolio|location)>' => 'site/index',
+              // actions for SiteController
+              '<action:(politic|user|call|country|region|city)>' => 'site/<action>',
+              // actions for UserController
               '<action:(login|logout|signup|request-password-reset|reset-password)>' => 'user/<action>',
-//            '<action:\w+>' => 'site/<action>',
-//              '<url:(.*)>' => 'site/index',
+              // actions for ConstructorController
+              '<action:(constructor)>' => 'constructor/index',
             ],
         ],
 
