@@ -8,7 +8,7 @@ return [
     'siteUrl' =>'alexart.s-solo.ru',
     'protocol' =>'https',
     'company' => 'Alex-art21',
-    'email' => 'mail@site.ru',
+    'email' => 'mail@s-solo.ru',
     'adminEmail' => 'aa@aa.aa', // критично, должно совпадать с тем что в базе
     'supportEmail' => 'robot@site.com',
     'tel1' => '+7(987) 668-04-84',

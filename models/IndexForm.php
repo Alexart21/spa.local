@@ -51,18 +51,16 @@ class IndexForm extends Model
     /* Отправка почты */
     $name = mb_ucfirst(clr_get($this->name));
     $email = clr_get($this->email);
-    $tel = $this->tel ? '<br>Тел: ' . clr_get($this->tel) . '<br>' : null;
+    $tel = $this->tel ? 'Тел: ' . clr_get($this->tel) : null;
     $text = clr_get($this->text);
 
     $subject = 'Письмо с сайта Alex-art';
-    $body = 'Вам пишет <b style="font-size: 120%;text-shadow: 0 1px 0 #e61b05">' . $name . '</b><br>E-mail : ' . $email . '<br> Тел : ' . $tel . '<br><br><div style="font-style: italic">' . nl2br(Html::encode($text)) . '</div>' .
+    $body = 'Вам пишет <b style="font-size: 120%;text-shadow: 0 1px 0 #e61b05">' . $name . '</b><br>E-mail : ' . $email . '<br>' . $tel . '<br><br><div style="font-style: italic">' . nl2br(Html::encode($text)) . '</div>' .
       '<br><br>Сообщение отправлено с сайта <b>https:' . Yii::$app->params['siteUrl'] . '</b>';
 
     $success = Yii::$app->mailer->compose()
-      ->setTo(Yii::$app->params['bk_email'])
-      ->setFrom([Yii::$app->params['sender_email'] => Yii::$app->params['siteUrl']])
-//            ->setFrom(['mail@alexart.houme21.ru' => 'alexart.houme21.ru'])
-      ->setReplyTo([$email => $name])
+      ->setTo('mail@s-solo.ru')
+      ->setFrom(['mail@s-solo.ru' => 's-solo.ru'])
       ->setSubject($subject)
       ->setHtmlBody($body)
       ->send();

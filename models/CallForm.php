@@ -56,12 +56,12 @@ class callForm extends Model
             'Тел. :&nbsp;&nbsp;<b style="font-size: 110%;>' . $tel . '</b>' .
             '<br><br>Сообщение отправлено с сайта <b>https://' . Yii::$app->params['siteUrl'] . '</b>';
 
-        $success = Yii::$app->mailer->compose()
-            ->setTo(Yii::$app->params['email'])
-            ->setFrom([Yii::$app->params['email'] => Yii::$app->params['siteUrl']])
-            ->setSubject($subject)
-            ->setHtmlBody($body)
-            ->send();
+      $success = Yii::$app->mailer->compose()
+        ->setTo('mail@s-solo.ru')
+        ->setFrom(['mail@s-solo.ru' => 's-solo.ru'])
+        ->setSubject($subject)
+        ->setHtmlBody($body)
+        ->send();
 
         if ($success) {
                 return('<h3 style="color:green">Спасибо, ' . $name . ', Мы Вам обязательно перезвоним</h3>');
