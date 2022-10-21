@@ -219,7 +219,7 @@ $config = [
                // spa ссылки
               '<action:(index|sozdanie|prodvijenie|parsing|portfolio|location)>' => 'site/index',
               // actions for SiteController
-              '<action:(politic|user|call|country|region|city)>' => 'site/<action>',
+              '<action:(politic|user|call|country|region|city|form)>' => 'site/<action>',
               // actions for UserController
               '<action:(login|logout|signup|request-password-reset|reset-password)>' => 'user/<action>',
               // actions for ConstructorController

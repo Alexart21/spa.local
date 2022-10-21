@@ -2143,7 +2143,7 @@ mark {
 
 /**/
 .grecaptcha-badge {
-    visibility: hidden;
+    /*visibility: hidden !important;*/
 }
 
 .logo{

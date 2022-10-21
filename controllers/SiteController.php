@@ -13,6 +13,7 @@ use app\models\Country;
 use app\models\City;
 use app\models\Region;
 use Yii;
+use yii\base\BaseObject;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 
@@ -34,15 +35,29 @@ class SiteController extends Controller
     ];
   }
 
-  /*public function behaviors()
+  public function behaviors()
   {
       return [
-          'rateLimiter' => [
-              'class' => \yii\filters\RateLimiter::class,
-              'enableRateLimitHeaders' => true,
-          ],
+        'rateLimiter' => [
+          // сторонняя фича. Пишется в кэш.Бд не трогается.
+          'class' => \ethercreative\ratelimiter\RateLimiter::class,
+//          'only' => ['call'],
+          // The maximum number of all'ow'ed requests
+//          'rateLimit' => Yii::$app->params['rateLimit'],
+          'rateLimit' => 20,
+          // The time period for the rates to apply to
+          'timePeriod' => 60,
+          // Separate rate limiting for guests and authenticated users
+          // Defaults to true
+          // - false: use one set of rates, whether you are authenticated or not
+          // - true: use separate ratesfor guests and authenticated users
+          'separateRates' => false,
+          // Whether to return HTTP headers containing the current rate limiting information
+          'enableRateLimitHeaders' => true,
+          'errorMessage' => 'Лимит запросов исчерпан. Не более ' . Yii::$app->params['rateLimit'] . ' попыток в минуту',
+        ],
       ];
-  }*/
+  }
 
   public function onAuthSuccess($client)
   {
@@ -148,9 +163,12 @@ class SiteController extends Controller
    */
   public function actionIndex()
   {
+    return $this->render('index');
+  }
+
+  public function actionForm(){
     $indexForm = new IndexForm();
     $request = Yii::$app->request;
-
     /* Отправка сообщения и запись в БД */
     if ($indexForm->load($request->post())) {
       $response = Yii::$app->response;
@@ -172,7 +190,6 @@ class SiteController extends Controller
       }
       return json_encode($response->data);
     }
-    return $this->render('index');
   }
 
   public function actionUser(){
