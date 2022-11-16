@@ -3,14 +3,14 @@
 use app\assets\AppAsset;
 use yii\helpers\Html;
 //use yii\helpers\FileHelper;
-header('X-Frame-Options: sameorigin');
-header('X-Content-Type-Options: nosniff');
-header('X-XSS-Protection: 1;mode=block');
+//header('X-Frame-Options: sameorigin');
+//header('X-Content-Type-Options: nosniff');
+//header('X-XSS-Protection: 1;mode=block');
 /* При подключении аналитики проверь адреса Content-Security-Policy: script-src */
 //header('Content-Security-Policy: default-src \'self\' \'unsafe-inline\' \'unsafe-eval\'; img-src \'self\' data:; style-src \'self\' \'unsafe-inline\'; script-src \'self\' \'unsafe-inline\' *.google.com www.gstatic.com; frame-src *.google.com gstatic.com');
-header('Permissions-Policy: camera=(), display-capture=(), geolocation=(), microphone=()');
-header('Referrer-Policy: origin-when-cross-origin');
-header('Strict-Transport-Security: max-age=31536000');
+//header('Permissions-Policy: camera=(), display-capture=(), geolocation=(), microphone=()');
+//header('Referrer-Policy: origin-when-cross-origin');
+//header('Strict-Transport-Security: max-age=31536000');
 
 AppAsset::register($this);
 
