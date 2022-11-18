@@ -1,4 +1,4 @@
-.modal[data-v-0468d397]{display:block;background:rgba(0,0,0,.2)}.status[data-v-0468d397],.status[data-v-6de9a0d3]{float:right}.d-list,.d-list datalist,.d-list input,.d-list option{width:500px;min-width:400px}.d-list input,.d-list input:focus{outline:none;padding:.7em;font-size:120%;border:1px solid #e1a20e;border-radius:5px}
+.modal[data-v-0468d397]{display:block;background:rgba(0,0,0,.2)}.status[data-v-0468d397],.status[data-v-6de9a0d3]{float:right}.d-list,.d-list datalist,.d-list input,.d-list option{width:100%;min-width:400px}.d-list input,.d-list input:focus{outline:none;padding:.7em;font-size:120%;border:1px solid #e1a20e;border-radius:5px}#scroll-container{height:200px;overflow-Y:scroll;border:1px solid #000;padding:20px}.loader{width:100%;text-align:center;height:60px;font-size:200%;line-height:60px}
 
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)

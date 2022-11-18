@@ -217,9 +217,10 @@ $config = [
             'rules' => [
               ['class' => 'yii\rest\UrlRule', 'controller' => 'site'],
                // spa ссылки
-              '<action:(index|sozdanie|prodvijenie|parsing|portfolio|location|address)>' => 'site/index',
+              '<action:(index|sozdanie|prodvijenie|parsing|portfolio|location|address|scroll)>' => 'site/index',
               // actions for SiteController
               '<action:(politic|user|call|country|region|city|form)>' => 'site/<action>',
+              '<action:(inf)>' => 'api/<action>',
               // actions for UserController
               '<action:(login|logout|signup|request-password-reset|reset-password)>' => 'user/<action>',
               // actions for ConstructorController

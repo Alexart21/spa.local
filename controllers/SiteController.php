@@ -38,7 +38,7 @@ class SiteController extends Controller
   public function behaviors()
   {
       return [
-        'rateLimiter' => [
+        /*'rateLimiter' => [
           // сторонняя фича. Пишется в кэш.Бд не трогается.
           'class' => \ethercreative\ratelimiter\RateLimiter::class,
 //          'only' => ['call'],
@@ -55,7 +55,7 @@ class SiteController extends Controller
           // Whether to return HTTP headers containing the current rate limiting information
           'enableRateLimitHeaders' => true,
           'errorMessage' => 'Лимит запросов исчерпан. Не более ' . Yii::$app->params['rateLimit'] . ' попыток в минуту',
-        ],
+        ],*/
       ];
   }
 
